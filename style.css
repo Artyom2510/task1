@@ -38,7 +38,6 @@
 	border: 3px solid #fff;
 	border-radius: 50%;
 }
-
 .input:focus::-webkit-slider-thumb {
 	background-image: url('close.svg');
 	background-position: 50% 50%;
@@ -46,15 +45,62 @@
 	background-repeat: no-repeat;
 }
 .block__img {
+	position: relative;
+	overflow: hidden;
 	display: block;
 	width: 100%;
-	min-height: 480px;
+	height: 520px;
 	margin-bottom: 20px;
 }
 .block__img img {
+	position: absolute;
 	width: 100%;
-	height: 100%;
+	height: auto;
 	cursor: move;
 	object-fit: cover;
 	object-position: 50% 50%;
 }
+.block__input-btn {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.buttons {
+	display: flex;
+	justify-content: space-between;
+	width: 45%;
+}
+.btn {
+	position: relative;
+	display: inline-flex;
+	width: 20px;
+	height: 20px;
+	outline: none !important;
+	border: none;
+	cursor: pointer;
+	background-color: #82c74e;
+}
+.btn::before {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 0;
+	height: 0;
+	border: 8px solid transparent;
+	border-top: none;
+	border-bottom: 8px solid #fff;
+}
+.buttons__top::before {
+	transform: translate(-50%, -50%);
+}
+.buttons__bottom::before {
+	transform: translate(-50%, -35%) rotate(180deg);
+}
+.buttons__left::before {
+	transform: translate(-35%, -50%) rotate(90deg);
+}
+.buttons__right::before {
+	transform: translate(-55%, -50%) rotate(-90deg);
+}
+

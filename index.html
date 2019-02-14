@@ -17,32 +17,30 @@
 			<div class="container">
 				<div class="block">
 					<div class="block__inputs">
-						<input type="range" min="0" max="100" step="1" value="50" id ="a1" class="input js-contrast">
-						<input type="range" min="-1" max="1" step="0.1" value="0" id="a2" class="input js-lighteen">
+						<input type="range" min="0" max="100" step="1" value="50" class="input js-invert">
+						<input type="range" min="0" max="100" step="1" value="50" class="input js-brightness">
 					</div>
 				</div>
 				<div class="block__img">
 					<img src="sok-sok.jpeg" id="img" alt="" class="js-img">
 				</div>
-				<input onchange="zoomImg()" type="range" id ="a3" min="0" max="100" step="10" value="100" class="input js-zoom">
+				<div class="block__input-btn">
+					<input type="range" min="10" max="100" step="9" value="100" class="input js-zoom">
+					<div class="buttons">
+						<button class="buttons__top btn js-top"></button>
+						<button class="buttons__bottom btn js-bottom"></button>
+						<button class="buttons__left btn js-left"></button>
+						<button class="buttons__right btn js-right"></button>
+					</div>
+				</div>
 			</div>
 			</div>
 		</section>
 
 	</main>
 	<script>
-		// var contrast = document.getElementById('a1').value;
-		// var lighteen = document.getElementById('a2').value;
-		// // funnction contrastImg() {
-		// // 	var a;
-		// // }
-		// contrastImg();
-		function zoomImg() {
-			var zoom = document.getElementById('a3').value;
-			var img = document.getElementById('img');
-			img.style.width = zoom * 6.6 + "px";
-		}
-		zoomImg();
+		
+
 	</script>
 </body>
 
