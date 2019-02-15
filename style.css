@@ -49,16 +49,22 @@
 	overflow: hidden;
 	display: block;
 	width: 100%;
-	height: 520px;
+	height: 500px;
 	margin-bottom: 20px;
 }
 .block__img img {
 	position: absolute;
+	top: 0;
+	left: 0;
 	width: 100%;
-	height: auto;
-	cursor: move;
+	height: 500px;
 	object-fit: cover;
 	object-position: 50% 50%;
+	cursor: move;
+	transition: all .3s ease
+}
+.block__img img.static {
+	position: static;
 }
 .block__input-btn {
 	display: flex;
@@ -102,5 +108,9 @@
 }
 .buttons__right::before {
 	transform: translate(-55%, -50%) rotate(-90deg);
+}
+.buttons__middle::before {
+	transform: translate(-50%, -50%);
+	border: 5px solid #fff;
 }
 
