@@ -2,7 +2,7 @@
 	display: block;
 	width: 40%;
 	height: 100vh;
-	margin: 100px auto;
+	margin: 0px auto;
 }
 .block {
 	display: block;
@@ -68,6 +68,7 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	margin-bottom: 30px;
 }
 .buttons {
 	display: flex;
@@ -118,4 +119,19 @@
 	transform: translate(-50%, -50%);
 	border: 5px solid #fff;
 }
-
+.lens {
+	position: absolute;
+	z-index: 0;
+	left: 0;
+	top: 0;
+	display: none;
+	width: 100px;
+	height: 100px;
+	border: 2px solid black;
+	box-sizing: border-box;
+	background-color: #fff;
+	opacity: .3;
+}
+.lens.display {
+	display: block;
+}

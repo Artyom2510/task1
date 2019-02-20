@@ -151,4 +151,51 @@ window.onload = function() {
 		}
 	});
 
+	var lens = document.querySelector('.js-lens');
+	var aaa = document.querySelector('.js-block-img').offsetWidth;
+	var bbb = document.querySelector('.js-block-img').offsetHeight;
+
+	lens.onmousedown = function(e) {
+
+	var coords = getCoords(lens);
+	var shiftX = e.pageX - coords.left;
+	var shiftY = e.pageY - coords.top;
+
+	moveAt(e);
+
+	function moveAt(e) {
+		lens.style.left = e.pageX - shiftX + 'px';
+		lens.style.top = e.pageY - shiftY + 'px';
+	}
+
+	document.onmousemove = function(e) {
+		moveAt(e);
+	};
+
+	lens.onmouseup = function() {
+		document.onmousemove = null;
+		lens.onmouseup = null;
+	};
+
+}
+
+lens.ondragstart = function() {
+	return false;
+};
+
+function getCoords(elem) {
+	var box = elem.getBoundingClientRect();
+	return {
+		top: box.top + aaa,
+		left: box.left + bbb
+	};
+}
+
+	document.querySelector('.js-block-img').addEventListener('mouseenter', function() {
+		document.querySelector('.js-lens').classList.add('display');
+	});
+	document.querySelector('.js-block-img').addEventListener('mouseleave', function() {
+		document.querySelector('.js-lens').classList.remove('display');
+	});
+
 }
