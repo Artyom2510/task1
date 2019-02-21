@@ -104,16 +104,16 @@
 	border-bottom: 8px solid #fff;
 }
 .buttons__top::before {
-	transform: translate(-50%, -50%);
-}
-.buttons__bottom::before {
 	transform: translate(-50%, -35%) rotate(180deg);
 }
+.buttons__bottom::before {
+	transform: translate(-50%, -50%);
+}
 .buttons__left::before {
-	transform: translate(-35%, -50%) rotate(90deg);
+	transform: translate(-55%, -50%) rotate(-90deg);
 }
 .buttons__right::before {
-	transform: translate(-55%, -50%) rotate(-90deg);
+	transform: translate(-35%, -50%) rotate(90deg);
 }
 .buttons__middle::before {
 	transform: translate(-50%, -50%);
