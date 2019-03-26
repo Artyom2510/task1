@@ -61,7 +61,6 @@
 	object-fit: cover;
 	object-position: 50% 50%;
 	filter: brightness(50%) contrast(50%);
-	cursor: move;
 	transition: all .3s ease;
 }
 .block__input-btn {
@@ -125,12 +124,13 @@
 	left: 0;
 	top: 0;
 	display: none;
-	width: 100px;
-	height: 100px;
+	width: 25%;
+	height: 150px;
 	border: 2px solid black;
 	box-sizing: border-box;
-	background-color: #fff;
-	opacity: .3;
+	background-color: transparent;
+	box-shadow: 0px 36px 138px 150px rgba(255,255,255, 0.75);
+	cursor: move;
 }
 .lens.display {
 	display: block;

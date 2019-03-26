@@ -152,23 +152,49 @@ window.onload = function() {
 	});
 
 	document.querySelector('.js-block-img').addEventListener('mouseenter', function() {
-		document.querySelector('.js-lens').classList.add('display');
 		var lens = document.querySelector('.js-lens');
-
+		lens.classList.add('display');
+		var block = document.querySelector('.js-block-img');
+	
 		var widthBlock = document.querySelector('.js-block-img').offsetWidth;
 		var heightBlock = document.querySelector('.js-block-img').offsetHeight;
 	
 		lens.onmousedown = function(e) {
 	
 			var coords = getCoords(lens);
+			var coordsBlock = getCoords(block);
 			var shiftX = e.pageX - coords.left;
 			var shiftY = e.pageY - coords.top;
-	
-			moveAt(e);
+			var limits = {
+				top: block.offsetTop,
+				right: widthBlock + block.offsetLeft - lens.offsetWidth,
+				bottom: heightBlock + block.offsetTop - lens.offsetHeight,
+				left: block.offsetLeft
+			};
+			// function move(e) {
+				
+			// 	if (e.pageX > limits.right) {
+			// 		newLocation.x = limits.right;
+			// 	} else if (e.pageX > limits.left) {
+			// 		newLocation.x = e.pageX;
+			// 	}
+			// 	if (e.pageY > limits.bottom) {
+			// 		newLocation.y = limits.bottom;
+			// 	} else if (e.pageY > limits.top) {
+			// 		newLocation.y = e.pageY;
+			// 	}
+			// 	relocate(newLocation);
+			// }
+			
+			// //* размещение lens
+			// function relocate(newLocation) {
+			// 	lens.style.left = newLocation.x + 'px';
+			// 	lens.style.top = newLocation.y + 'px';
+			// }
 	
 			function moveAt(e) {
-				lens.style.left = e.pageX - shiftX + 'px';
-				lens.style.top = e.pageY - shiftY + 'px';
+				lens.style.top = e.pageY - coordsBlock.top - shiftY + 'px';
+				lens.style.left = e.pageX - coordsBlock.left - shiftX + 'px';
 			}
 	
 			document.onmousemove = function(e) {
@@ -185,15 +211,52 @@ window.onload = function() {
 		lens.ondragstart = function() {
 			return false;
 		};
-	
-		function getCoords(elem) {
-			var box = elem.getBoundingClientRect();
-			console.log(widthBlock, heightBlock);
+
+		function getCoords(e) {
+			var box = e.getBoundingClientRect();
 			return {
-				top: box.top + pageYOffset - widthBlock,
-				left: box.left + pageXOffset- widthBlock
+				top: box.top + pageYOffset,
+				left: box.left + pageXOffset,
 			};
 		}
+		function addOnWheel(elem, handler) {
+			if (elem.addEventListener) {
+				if ('onwheel' in document) {
+					// IE9+, FF17+
+					elem.addEventListener("wheel", handler);
+				} else if ('onmousewheel' in document) {
+					// устаревший вариант события
+					elem.addEventListener("mousewheel", handler);
+				} else {
+					// 3.5 <= Firefox < 17, более старое событие DOMMouseScroll пропустим
+					elem.addEventListener("MozMousePixelScroll", handler);
+				}
+			} else { // IE8-
+				lens.attachEvent("onmousewheel", handler);
+			}
+		}
+
+		addOnWheel(lens, function(e) {
+
+			var delta = e.deltaY || e.detail || e.wheelDelta;
+
+			// отмасштабируем при помощи CSS
+			var lensH = document.querySelector('.js-lens').offsetHeight;
+			var lensW = document.querySelector('.js-lens').offsetWidth;
+			if( delta > 0 && lensH < heightBlock - 50 ) {
+				lensW += 50;
+				lensH += 50;
+			} else if( delta < 0 && lensH > 150 ) {
+				lensW -= 50;
+				lensH -= 50;
+			}
+			lens.style.width = lensW +'px';
+			lens.style.height = lensH +'px';
+
+			// отменим прокрутку
+			e.preventDefault();
+		});
+	
 	});
 	document.querySelector('.js-block-img').addEventListener('mouseleave', function() {
 		document.querySelector('.js-lens').classList.remove('display');
